@@ -13,89 +13,32 @@ using OpenQA.Selenium.Interactions;
 using NUnit.Framework;
 
 
-namespace addressbook_web_tests { 
+namespace addressbook_web_tests {
 
-[TestFixture]
-public class ContactCreationTests : TestBase
+    [TestFixture]
+    public class ContactCreationTests : TestBase
     {
-    private IWebDriver driver;
-    public IDictionary<string, object> vars { get; private set; }
-    private IJavaScriptExecutor js;
-
-    [SetUp]
-    public void SetUp()
-    {
-        driver = new ChromeDriver();
-        js = (IJavaScriptExecutor)driver;
-        vars = new Dictionary<string, object>();
-    }
-    [TearDown]
-    protected void TearDown()
-    {
-       // driver.Quit();
-    }
-    [Test]
-    public void ContactCreation()
+        [Test]
+        public void ContactCreation()
         {
-            GoToHomePage();
-            Login(new AccountData ("admin","secret"));
-            InitContactCreation();
-            ContactCreationtData contact = new ContactCreationtData("123");
+            app.Navigator.GoToHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
+            app.Contact.InitContactCreation();
+            var contact = new ContactCreationtData("345");
             contact.Lastname = "";
             contact.Middlename = "";
             contact.Nickname = "";
             contact.Home = "";
-            contact.Company = "";
-            contact.Address = "";
-            contact.Title = "";
+            contact.Company = "s";
+            contact.Address = "sdf";
+            contact.Title = "L";
 
-            FillContactForm(contact);
-            
-            SubmitNewContact();
-            Logout();
+            app.Contact.FillContactForm(contact);
 
-            
+            app.Contact.SubmitNewContact();
+            app.Auth.Logout();
            // Console.WriteLine(account.Username);
         }
 
-       
-
-        
-
-        private void FillContactForm(ContactCreationtData contact)
-        {
-           
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
-            driver.FindElement(By.Name("lastname")).Click();
-            driver.FindElement(By.Name("lastname")).SendKeys(contact.Lastname);
-            driver.FindElement(By.Name("middlename")).Click();
-            driver.FindElement(By.Name("middlename")).SendKeys(contact.Middlename);
-            driver.FindElement(By.Name("nickname")).Click();
-            driver.FindElement(By.Name("nickname")).SendKeys(contact.Nickname);
-            driver.FindElement(By.Name("title")).Click();
-            driver.FindElement(By.Name("title")).SendKeys(contact.Title);
-            driver.FindElement(By.Name("company")).Click();
-            driver.FindElement(By.Name("company")).SendKeys(contact.Company);
-         //   driver.FindElement(By.Name("photo")).Click();
-            driver.FindElement(By.Name("address")).Click();
-            driver.FindElement(By.Name("address")).SendKeys(contact.Address);
-            driver.FindElement(By.Name("home")).Click();
-            driver.FindElement(By.Name("home")).SendKeys(contact.Home);
-            /*driver.FindElement(By.Name("mobile")).Click();
-            driver.FindElement(By.Name("mobile")).SendKeys("1");
-            driver.FindElement(By.Name("work")).Click();
-            driver.FindElement(By.Name("work")).SendKeys("1");
-            driver.FindElement(By.Name("fax")).Click();
-            driver.FindElement(By.Name("fax")).SendKeys("1");
-            driver.FindElement(By.Name("email")).Click();
-            driver.FindElement(By.Name("email")).SendKeys("1");
-            driver.FindElement(By.Name("email2")).Click();
-            driver.FindElement(By.Name("email2")).SendKeys("1");
-            driver.FindElement(By.Name("email3")).Click();
-            driver.FindElement(By.Name("email3")).SendKeys("1");
-            driver.FindElement(By.Name("homepage")).Click();
-            driver.FindElement(By.Name("homepage")).SendKeys("1");*/
-        }     
     }
 }

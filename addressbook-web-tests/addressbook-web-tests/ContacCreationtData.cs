@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace addressbook_web_tests
 {
-    class ContactCreationtData 
+    public class ContactCreationtData 
     {
-        private string firstname;
-        private string lastname = "";
-        private string middlename="";
-        private string nickname = "";
-        private string title = "";
-        private string company = "";
-        private string address = "";
-        private string home = "";
+        public string firstname;
+        public string lastname = "";
+        public string middlename="";
+        public string nickname = "";
+        public string title = "";
+        public string company = "";
+        public string address = "";
+        public string home = "";
 
         public ContactCreationtData(string firstname)
         {

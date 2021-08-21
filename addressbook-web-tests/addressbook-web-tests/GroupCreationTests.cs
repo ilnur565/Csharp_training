@@ -16,28 +16,25 @@ using addressbook_web_tests;
 namespace addressbook_web_tests
 {
 
-[TestFixture]
-public class GroupCreationTests : TestBase
+    [TestFixture]
+    public class GroupCreationTests : TestBase
     {
-   
-    [Test]
+        [Test]
         public void GroupCreationTest()
         {
-            
-            GoToHomePage();
-            driver.Manage().Window.Size = new System.Drawing.Size(1007, 692);
-            Login(new AccountData ("admin", "secret"));
-            GoToGroupsPage();
-            InitGroupCreation();
-            GroupData group = new GroupData("123");
+            SetUp();  
+            app.Navigator.GoToHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
+            app.Navigator.GoToGroupsPage();
+            app.Groups.InitGroupCreation();
+            var group = new GroupData("34563457");
             group.Header = "d2";
             group.Footer = "f2";
-            FillGroupForm(group);
-            SubmitGroupCreation(); 
-            ReturnToGroupsPage();
-            Logout();
-            TearDown();
-        }    
+            app.Groups.FillGroupForm(group);
+            app.Groups.SubmitGroupCreation();
+            app.Groups.ReturnToGroupsPage();
+            app.Auth.Logout();
+        }
 
     }
 }
