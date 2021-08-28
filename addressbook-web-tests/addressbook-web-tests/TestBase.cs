@@ -22,6 +22,8 @@ namespace addressbook_web_tests
         public void SetUp()
         {
             app = new ApplicationManager();
+            app.Navigator.GoToHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
         }
 
 

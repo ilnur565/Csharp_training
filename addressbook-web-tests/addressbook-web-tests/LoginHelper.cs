@@ -11,7 +11,7 @@ namespace addressbook_web_tests
      public class LoginHelper : HelperBase
     {
 
-        public LoginHelper(IWebDriver driver): base(driver) // так  как имеем один общий класс для помощников - HelperBase, то обращаемся так к его конструктору
+        public LoginHelper(ApplicationManager manager): base(manager) // так  как имеем один общий класс для помощников - HelperBase, то обращаемся так к его конструктору
         {
         }
         public void Login(AccountData account)

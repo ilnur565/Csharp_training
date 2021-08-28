@@ -21,8 +21,6 @@ namespace addressbook_web_tests {
         [Test]
         public void ContactCreation()
         {
-            app.Navigator.GoToHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
             app.Contact.InitContactCreation();
             var contact = new ContactCreationtData("345");
             contact.Lastname = "";

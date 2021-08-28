@@ -25,10 +25,10 @@ namespace addressbook_web_tests
             js = (IJavaScriptExecutor)driver;
             vars = new Dictionary<string, object>();
 
-        loginHelper = new LoginHelper(driver);
-        navigator = new NavigationHelper(driver);
-        groupHelper = new GroupHelper(driver);
-        contactHelper = new ContactHelper(driver);   
+        loginHelper = new LoginHelper(this);
+        navigator = new NavigationHelper(this);
+        groupHelper = new GroupHelper(this);
+        contactHelper = new ContactHelper(this);   
         }
 
         public void Stop()
@@ -62,6 +62,13 @@ namespace addressbook_web_tests
             get
             {
                 return contactHelper;
+            }
+        }
+
+        public IWebDriver Driver 
+        { get 
+            {
+                return driver;
             }
         }
     }   

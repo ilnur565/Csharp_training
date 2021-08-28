@@ -20,19 +20,28 @@ namespace addressbook_web_tests
     public class GroupCreationTests : TestBase
     {
         [Test]
-        public void GroupCreationTest()
+        /*public void GroupCreationTest()
         {
-            SetUp();  
-            app.Navigator.GoToHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
-            app.Navigator.GoToGroupsPage();
-            app.Groups.InitGroupCreation();
-            var group = new GroupData("34563457");
+           
+            GroupData group = new GroupData("34563457");
             group.Header = "d2";
             group.Footer = "f2";
-            app.Groups.FillGroupForm(group);
-            app.Groups.SubmitGroupCreation();
-            app.Groups.ReturnToGroupsPage();
+            app.Navigator.GoToGroupsPage();
+            app.Groups
+                .InitGroupCreation()
+                .FillGroupForm(group)
+                .SubmitGroupCreation()
+                .ReturnToGroupsPage();
+            //app.Auth.Logout();
+        }*/
+        
+        public void EmptyGroupCreationTest()
+        {
+            
+            GroupData group = new GroupData("IIIIIIIII");
+            group.Header = "sadf";
+            group.Footer = "ddd";
+            app.Groups.Create(group);
             app.Auth.Logout();
         }
 
