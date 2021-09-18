@@ -22,7 +22,7 @@ namespace addressbook_web_tests {
         public void ContactCreation()
         {
             app.Contact.InitContactCreation();
-            var contact = new ContactCreationtData("345");
+            var contact = new ContactCreationtData("QWERTY");
             contact.Lastname = "";
             contact.Middlename = "";
             contact.Nickname = "";
@@ -31,9 +31,8 @@ namespace addressbook_web_tests {
             contact.Address = "sdf";
             contact.Title = "L";
 
-            app.Contact.FillContactForm(contact);
-
-            app.Contact.SubmitNewContact();
+            app.Contact.FillContactForm(contact)
+                        .SubmitNewContact();
             app.Auth.Logout();
            // Console.WriteLine(account.Username);
         }

@@ -38,9 +38,9 @@ namespace addressbook_web_tests
         public void EmptyGroupCreationTest()
         {
             
-            GroupData group = new GroupData("IIIIIIIII");
-            group.Header = "sadf";
-            group.Footer = "ddd";
+            var group = new GroupData("");
+            group.Header = "";
+            group.Footer = "";
             app.Groups.Create(group);
             app.Auth.Logout();
         }

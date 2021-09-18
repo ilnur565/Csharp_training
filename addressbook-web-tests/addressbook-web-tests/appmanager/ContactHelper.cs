@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using NUnit.Framework;
 using OpenQA.Selenium;
 
 namespace addressbook_web_tests
@@ -12,15 +14,33 @@ namespace addressbook_web_tests
         public ContactHelper(ApplicationManager manager) : base (manager)
         { 
         }
-        public void SubmitNewContact()
+        public ContactHelper SubmitNewContact()
         {
             driver.FindElement(By.CssSelector("input:nth-child(87)")).Click();
+            return this;
         }
-        public void InitContactCreation()
+
+        /*public ContactHelper Modify( object contactData)
+        {
+            manager.Navigator.GoToContactsPage();
+            InitGroupModification();
+            FillContactForm(contactData);
+
+            return this;
+        }
+*/
+        private ContactHelper InitGroupModification()
+        {
+            return this;
+        }
+
+        public ContactHelper InitContactCreation()
         {
             driver.FindElement(By.LinkText("add new")).Click();
+            return this;
         }
-        public void FillContactForm(ContactCreationtData contact)
+
+        public ContactHelper FillContactForm(ContactCreationtData contact)
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
@@ -53,8 +73,31 @@ namespace addressbook_web_tests
             driver.FindElement(By.Name("email3")).SendKeys("1");
             driver.FindElement(By.Name("homepage")).Click();
             driver.FindElement(By.Name("homepage")).SendKeys("1");*/
+            return this;
         }
+        public ContactHelper ContactRemovalTest(int b)
+        {
 
+            manager.Navigator.GoToContactsPage();
+            SelectContact(b);
+            RemoveContact();
+            Thread.Sleep(3000);
+            //driver.FindElement(By.CssSelector(".left:nth-child(8) > input")).Click();
+            driver.SwitchTo().Alert().Accept();
+
+            /*Assert.That(driver.SwitchTo().Alert().Text, Is.EqualTo("Delete 1 addresses?"));*/
+            return this;
+        }
+        public ContactHelper SelectContact( int index)
+        {
+            driver.FindElement(By.XPath("//input[@id='" + index + "'] ")).Click();
+            return this;
+        }
+        public ContactHelper RemoveContact()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            return this;
+        }
 
     }
 }
