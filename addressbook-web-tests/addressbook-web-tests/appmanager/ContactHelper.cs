@@ -20,6 +20,16 @@ namespace addressbook_web_tests
             return this;
         }
 
+        public ContactHelper ContactCreation(ContactCreationtData contact)
+        {
+            manager.Navigator.GoToContactsPage();
+            InitContactCreation();
+            FillContactForm(contact);
+            SubmitNewContact();
+
+            return this;
+        }
+
         /*public ContactHelper Modify( object contactData)
         {
             manager.Navigator.GoToContactsPage();

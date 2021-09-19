@@ -21,12 +21,15 @@ namespace addressbook_web_tests {
         [Test]
         public void ContactCreation()
         {
-            app.Contact.InitContactCreation();
-            var contact = new ContactCreationtData("QWERTY");
-            contact.Lastname = "";
+            var contact = new ContactCreationtData("IIIIIII", "KKKKK");
+            app.Contact.ContactCreation(contact);
+
+            /*app.Contact.InitContactCreation();
+            var contact = new ContactCreationtData("Sergeev", "Sergey");
+            //contact.Lastname = "";
             contact.Middlename = "";
-            contact.Nickname = "";
-            contact.Home = "";
+            contact.Nickname = "1";
+            contact.Home = "1";
             contact.Company = "s";
             contact.Address = "sdf";
             contact.Title = "L";
@@ -34,7 +37,12 @@ namespace addressbook_web_tests {
             app.Contact.FillContactForm(contact)
                         .SubmitNewContact();
             app.Auth.Logout();
-           // Console.WriteLine(account.Username);
+                                   // Console.WriteLine(account.Username);
+*/
+
+
+           
+
         }
 
     }

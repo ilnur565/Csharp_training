@@ -17,10 +17,11 @@ namespace addressbook_web_tests
         public string address = "";
         public string home = "";
 
-        public ContactCreationtData(string firstname)
+        public ContactCreationtData(string firstname, string lastname)
         {
             this.firstname = firstname;
-           
+            this.lastname = lastname;
+
         }
 
         public string Firstname
