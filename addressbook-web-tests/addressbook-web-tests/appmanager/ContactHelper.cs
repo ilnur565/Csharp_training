@@ -108,7 +108,26 @@ namespace addressbook_web_tests
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             return this;
         }
-
+        public ContactHelper ClearContact( int index)
+        {
+            manager.Navigator.GoToContactsPage();
+            driver.FindElement(By.CssSelector("tr:nth-child("+index+") > .center:nth-child(8) img")).Click();
+            driver.FindElement(By.Name("firstname")).Clear();
+            driver.FindElement(By.Name("lastname")).Clear();
+            return this;
+        }
+        public ContactHelper EditContact(ContactCreationtData contact, int value)
+        {
+            ClearContact(value);
+            FillContactForm(contact);
+            SibmitContactModification();
+            manager.Navigator.GoToHomePage();
+            return this;
+        }
+        public ContactHelper SibmitContactModification() {
+            driver.FindElement(By.XPath("//input[@type='submit']")).Click();
+            return this;
+        }
     }
 }
 
