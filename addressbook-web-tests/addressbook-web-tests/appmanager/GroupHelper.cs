@@ -57,14 +57,22 @@ namespace addressbook_web_tests
         }
         public GroupHelper FillGroupForm(GroupData group)
         {
-            driver.FindElement(By.Name("group_name")).Click();
-            driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
-            driver.FindElement(By.Name("group_header")).Click();
-            driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
-            driver.FindElement(By.Name("group_footer")).Click();
-            driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
+            Type (By.Name("group_name"), group.Name);
+            Type (By.Name("group_header"), group.Header);
+            Type (By.Name("group_footer"), group.Footer);
             return this;
         }
+
+        public void Type(By locator, string text)
+        {
+            if (text != null) 
+            {
+                driver.FindElement(locator).Clear();
+                driver.FindElement(locator).SendKeys(text);
+
+            }
+        }
+
         public GroupHelper SubmitGroupCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
