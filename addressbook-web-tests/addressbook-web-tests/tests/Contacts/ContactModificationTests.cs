@@ -8,7 +8,7 @@ namespace addressbook_web_tests
         [Test]
         public void ContactModificationTest()
         {
-            var contact1 = new ContactCreationtData("GGGGGGGG", "FFFFFFFFr");
+            var contact1 = new ContactCreationtData("ILNUR&^&", "FFFFFFFFr");
             app.Contact.EditContact(contact1, 4);
 
 

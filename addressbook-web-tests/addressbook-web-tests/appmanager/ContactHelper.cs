@@ -52,23 +52,17 @@ namespace addressbook_web_tests
 
         public ContactHelper FillContactForm(ContactCreationtData contact)
         {
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
-            driver.FindElement(By.Name("lastname")).Click();
-            driver.FindElement(By.Name("lastname")).SendKeys(contact.Lastname);
-            driver.FindElement(By.Name("middlename")).Click();
-            driver.FindElement(By.Name("middlename")).SendKeys(contact.Middlename);
-            driver.FindElement(By.Name("nickname")).Click();
-            driver.FindElement(By.Name("nickname")).SendKeys(contact.Nickname);
-            driver.FindElement(By.Name("title")).Click();
-            driver.FindElement(By.Name("title")).SendKeys(contact.Title);
-            driver.FindElement(By.Name("company")).Click();
-            driver.FindElement(By.Name("company")).SendKeys(contact.Company);
+
+            Type(By.Name("firstname"), contact.Firstname);
+            Type(By.Name("lastname"), contact.Lastname);
+            Type(By.Name("middlename"), contact.Middlename);
+            Type(By.Name("nickname"), contact.Nickname);
+            Type(By.Name("title"), contact.Title);
+            Type(By.Name("company"), contact.Company);
+            Type(By.Name("address"), contact.Address);
             //   driver.FindElement(By.Name("photo")).Click();
-            driver.FindElement(By.Name("address")).Click();
-            driver.FindElement(By.Name("address")).SendKeys(contact.Address);
-            driver.FindElement(By.Name("home")).Click();
-            driver.FindElement(By.Name("home")).SendKeys(contact.Home);
+            Type(By.Name("home"), contact.Home);
+           
             /*driver.FindElement(By.Name("mobile")).Click();
             driver.FindElement(By.Name("mobile")).SendKeys("1");
             driver.FindElement(By.Name("work")).Click();
