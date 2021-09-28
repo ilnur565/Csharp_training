@@ -17,6 +17,10 @@ namespace addressbook_web_tests
         }
         public void GoToHomePage()
         {
+            if(driver.Url == "http://localhost/addressbook/")
+            {
+                return;
+            }
             driver.Navigate().GoToUrl("http://localhost/addressbook/");
             driver.Manage().Window.Size = new System.Drawing.Size(1366, 538);
             driver.Manage().Window.Maximize();
@@ -24,6 +28,11 @@ namespace addressbook_web_tests
 
         public void GoToGroupsPage()
         {
+            if(driver.Url == "http://localhost/addressbook/group.php"
+                && IsElementPresent(By.Name("new")))
+            {
+                return;
+            }
             driver.FindElement(By.LinkText("groups")).Click();
         }
         public void GoToContactsPage()

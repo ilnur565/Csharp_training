@@ -17,7 +17,7 @@ namespace addressbook_web_tests
 {
 
     [TestFixture]
-    public class GroupCreationTests : TestBase
+    public class GroupCreationTests : AuthTestBase
     {
         [Test]
         /*public void GroupCreationTest()
@@ -42,7 +42,7 @@ namespace addressbook_web_tests
             group.Header = "";
             group.Footer = "";
             app.Groups.Create(group);
-            app.Auth.Logout();
+            //app.Auth.Logout();
         }
 
     }

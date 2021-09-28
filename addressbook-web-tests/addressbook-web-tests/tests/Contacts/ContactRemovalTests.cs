@@ -9,15 +9,15 @@ namespace addressbook_web_tests
 {
     [TestFixture]
 
-    public class ContactRemovalTests : TestBase
-   
+    public class ContactRemovalTests : AuthTestBase
+
     {
 
         [Test]
         public void ContactRemovalTest()
         {
 
-            app.Contact.ContactRemovalTest(22);
+            app.Contact.ContactRemovalTest(28);
 
            /* public void SelectContatct(int index)
             {

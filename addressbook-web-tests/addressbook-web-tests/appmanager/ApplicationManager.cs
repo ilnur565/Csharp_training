@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -18,24 +19,43 @@ namespace addressbook_web_tests
         protected NavigationHelper navigator;
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
+        private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
 
-        public ApplicationManager()
+        private ApplicationManager()
         {
             driver = new ChromeDriver();
             js = (IJavaScriptExecutor)driver;
             vars = new Dictionary<string, object>();
 
-        loginHelper = new LoginHelper(this);
-        navigator = new NavigationHelper(this);
-        groupHelper = new GroupHelper(this);
-        contactHelper = new ContactHelper(this);   
+            loginHelper = new LoginHelper(this);
+            navigator = new NavigationHelper(this);
+            groupHelper = new GroupHelper(this);
+            contactHelper = new ContactHelper(this);   
         }
-
-        public void Stop()
+         ~ApplicationManager()
         {
-            driver.Quit();
+            try
+            {
+                driver.Quit();
+            }
+            catch (Exception)
+            {
+            }
 
         }
+        public static ApplicationManager GetInstance()
+        {
+            if (! app.IsValueCreated)
+            {
+                ApplicationManager newInstance = new ApplicationManager();
+                newInstance.Navigator.GoToHomePage();
+                app.Value = newInstance;
+
+            }
+
+            return app.Value;   
+        }
+       
         public LoginHelper Auth 
         {
             get
@@ -71,5 +91,6 @@ namespace addressbook_web_tests
                 return driver;
             }
         }
+        
     }   
 }
