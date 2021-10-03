@@ -16,6 +16,15 @@ namespace addressbook_web_tests
          
         }
 
+        public void CreateGroupIfNotExists(int index)
+        {
+            manager.Navigator.GoToGroupsPage();
+            if (!IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]"))){
+                var group = new GroupData("123");
+               Create(group);
+            }
+        }
+
         public GroupHelper Create(GroupData group)
         {
             manager.Navigator.GoToGroupsPage();

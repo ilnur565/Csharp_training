@@ -14,6 +14,8 @@ namespace addressbook_web_tests
         public ContactHelper(ApplicationManager manager) : base (manager)
         { 
         }
+      
+
         public ContactHelper SubmitNewContact()
         {
             driver.FindElement(By.CssSelector("input:nth-child(87)")).Click();

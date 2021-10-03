@@ -14,6 +14,9 @@ namespace addressbook_web_tests
             var contact = new ContactCreationtData("IIIIIII", "KKKKK");
             app.Contact.ContactCreation(contact);
 
+
+
+
             /*app.Contact.InitContactCreation();
             var contact = new ContactCreationtData("Sergeev", "Sergey");
             //contact.Lastname = "";
@@ -28,11 +31,7 @@ namespace addressbook_web_tests
                         .SubmitNewContact();
             app.Auth.Logout();
                                    // Console.WriteLine(account.Username);
-*/
-
-
-           
-
+*/  
         }
 
     }

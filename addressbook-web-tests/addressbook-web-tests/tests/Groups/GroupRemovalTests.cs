@@ -18,18 +18,23 @@ namespace addressbook_web_tests
     [TestFixture]
     public class GroupRemovalTests : AuthTestBase
     {
+        [SetUp]
+        public void Preconditions()
+        {
+            app.Groups.CreateGroupIfNotExists(1);
+
+        }
        
         [Test]
         public void GroupRemovalTest()
         {
+           
             app.Groups.Remove(1);
-            
-            
-           /* app.Navigator.GoToGroupsPage();
-            app.Groups
-                .SelectGroup(5)
-                .RemoveGroup()
-                .ReturnToGroupsPage();*/
+            /* app.Navigator.GoToGroupsPage();
+             app.Groups
+                 .SelectGroup(5)
+                 .RemoveGroup()
+                 .ReturnToGroupsPage();*/
         }      
     }
 }
