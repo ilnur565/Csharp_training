@@ -83,7 +83,7 @@ namespace addressbook_web_tests
         }
         public ContactHelper ContactRemovalTest(int b)
         {
-
+            CreateContactIfIsNotExsist(b); 
             manager.Navigator.GoToContactsPage();
             SelectContact(b);
             RemoveContact();
@@ -94,9 +94,20 @@ namespace addressbook_web_tests
             /*Assert.That(driver.SwitchTo().Alert().Text, Is.EqualTo("Delete 1 addresses?"));*/
             return this;
         }
+
+        public void CreateContactIfIsNotExsist(int index)
+        {
+            manager.Navigator.GoToContactsPage();
+            if(!IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]")) )
+            {
+                var contact = new ContactCreationtData("Ilnur_V2", "WWW_V2");
+                ContactCreation(contact);
+            }
+        }
+
         public ContactHelper SelectContact( int index)
         {
-            driver.FindElement(By.XPath("//input[@id='" + index + "'] ")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
             return this;
         }
         public ContactHelper RemoveContact()

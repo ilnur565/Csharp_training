@@ -11,11 +11,9 @@ namespace addressbook_web_tests
         [Test]
         public void ContactCreation()
         {
-            var contact = new ContactCreationtData("IIIIIII", "KKKKK");
+           
+            var contact = new ContactCreationtData("Ilnur_", "WWW_");
             app.Contact.ContactCreation(contact);
-
-
-
 
             /*app.Contact.InitContactCreation();
             var contact = new ContactCreationtData("Sergeev", "Sergey");
@@ -31,7 +29,7 @@ namespace addressbook_web_tests
                         .SubmitNewContact();
             app.Auth.Logout();
                                    // Console.WriteLine(account.Username);
-*/  
+*/
         }
 
     }
