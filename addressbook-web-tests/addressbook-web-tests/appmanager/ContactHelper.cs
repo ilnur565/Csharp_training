@@ -83,7 +83,7 @@ namespace addressbook_web_tests
         }
         public ContactHelper ContactRemovalTest(int b)
         {
-            CreateContactIfIsNotExsist(b); 
+             
             manager.Navigator.GoToContactsPage();
             SelectContact(b);
             RemoveContact();
@@ -94,7 +94,19 @@ namespace addressbook_web_tests
             /*Assert.That(driver.SwitchTo().Alert().Text, Is.EqualTo("Delete 1 addresses?"));*/
             return this;
         }
+        public ContactHelper AllContactRemovalTest()
+        {
 
+            manager.Navigator.GoToContactsPage();
+            SelectALLContact();
+            RemoveContact();
+            Thread.Sleep(3000);
+            //driver.FindElement(By.CssSelector(".left:nth-child(8) > input")).Click();
+            driver.SwitchTo().Alert().Accept();
+
+            /*Assert.That(driver.SwitchTo().Alert().Text, Is.EqualTo("Delete 1 addresses?"));*/
+            return this;
+        }
         public void CreateContactIfIsNotExsist(int index)
         {
             manager.Navigator.GoToContactsPage();
@@ -110,6 +122,11 @@ namespace addressbook_web_tests
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
             return this;
         }
+        public ContactHelper SelectALLContact()
+        {
+            driver.FindElement(By.XPath("(//input[@onclick='MassSelection()'])")).Click();
+            return this;
+        }
         public ContactHelper RemoveContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
@@ -118,7 +135,7 @@ namespace addressbook_web_tests
         public ContactHelper ClearContact( int index)
         {
             manager.Navigator.GoToContactsPage();
-            driver.FindElement(By.CssSelector("tr:nth-child("+index+") > .center:nth-child(8) img")).Click();
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
             driver.FindElement(By.Name("lastname")).Clear();
             return this;

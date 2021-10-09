@@ -10,6 +10,13 @@ namespace addressbook_web_tests
     [TestFixture]
     public class GroupModificationTests: AuthTestBase
     {
+
+        [SetUp]
+        public void Preconditions()
+        {
+            app.Groups.CreateGroupIfNotExists(1);
+
+        }
         [Test]
         public void GroupModificationTest()
         {

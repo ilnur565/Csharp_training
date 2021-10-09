@@ -38,6 +38,7 @@ namespace addressbook_web_tests
 
         public GroupHelper Modify(int p, GroupData newData)
         {
+
             manager.Navigator.GoToGroupsPage();
             SelectGroup(p);
             InitGroupModification();

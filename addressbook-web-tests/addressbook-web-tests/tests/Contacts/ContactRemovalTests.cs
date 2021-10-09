@@ -13,6 +13,13 @@ namespace addressbook_web_tests
 
     {
 
+        [SetUp]
+        public void Preconditions()
+        {
+            var contact = new ContactCreationtData("Ilnur_", "WWW_");
+            app.Contact.CreateContactIfIsNotExsist(1);
+        }
+
         [Test]
         public void ContactRemovalTest()
         {
@@ -24,6 +31,19 @@ namespace addressbook_web_tests
                 driver.FindElement(By.Id("" + index + "")).Click();
             }
             driver.FindElement(By.XPath("//input[@ type='button'])"));*/
+        }
+
+        [Test]
+        public void AllContactRemovalTest()
+        {
+
+            app.Contact.AllContactRemovalTest();
+
+            /* public void SelectContatct(int index)
+             {
+                 driver.FindElement(By.Id("" + index + "")).Click();
+             }
+             driver.FindElement(By.XPath("//input[@ type='button'])"));*/
         }
     }
 }
