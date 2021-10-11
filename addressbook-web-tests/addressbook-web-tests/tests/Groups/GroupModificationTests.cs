@@ -14,7 +14,7 @@ namespace addressbook_web_tests
         [SetUp]
         public void Preconditions()
         {
-            app.Groups.CreateGroupIfNotExists(1);
+            app.Groups.CreateGroupIfNotExists(0);
 
         }
         [Test]
@@ -23,7 +23,7 @@ namespace addressbook_web_tests
             GroupData newData = new GroupData("ZZZ");
             newData.Header = null;
             newData.Footer = null;
-            app.Groups.Modify(1, newData);
+            app.Groups.Modify(0, newData);
         }
     }
 }

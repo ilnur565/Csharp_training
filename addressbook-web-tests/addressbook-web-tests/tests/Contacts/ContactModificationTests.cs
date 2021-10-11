@@ -16,7 +16,7 @@ namespace addressbook_web_tests
         public void ContactModificationTest()
         {
             var contact1 = new ContactCreationtData("ILNUR&^&", "FFFFFFFFr");
-            app.Contact.EditContact(contact1, 2);
+            app.Contact.EditContact(contact1, 1);
 
 
            /* ContactCreationtData contactData = new ContactCreationtData("345");
