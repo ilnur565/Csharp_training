@@ -47,7 +47,12 @@ namespace addressbook_web_tests
             app.Groups.Create(group);
             
             List<GroupData> newGroups = app.Groups.GetGroupList(); // Контейнер или коллекция т.е объект который хранит набор других объектов
-            Assert.AreEqual(oldGroups.Count+1, newGroups.Count);
+
+
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
             System.Console.Out.Write(oldGroups.Count+newGroups.Count);
             //app.Auth.Logout();
           
@@ -68,7 +73,12 @@ namespace addressbook_web_tests
             app.Groups.Create(group);
 
             List<GroupData> newGroups = app.Groups.GetGroupList(); // Контейнер или коллекция т.е объект который хранит набор других объектов
-            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+
+
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
             //app.Auth.Logout();
         }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace addressbook_web_tests
 {
-    public class GroupData : IEquatable<GroupData>  // определяем ф-ю сравнения; Класс GroupData наследует IEquatable
+    public class GroupData : IEquatable<GroupData>, IComparable<GroupData>  // определяем ф-ю сравнения; Класс GroupData наследует IEquatable
     {
         private string name;
         private string header=""; 
@@ -34,10 +34,22 @@ namespace addressbook_web_tests
             }
             return Name == other.Name;
         }
-        public int GetHashCode()
+        public override int GetHashCode()
         {
             return Name.GetHashCode();
         }
+        public override string ToString() { 
+        
+        return "name = "+ Name;
+        }
+        public int CompareTo(GroupData other) { 
+            if(Object.ReferenceEquals(other, null))
+            {
+                return 1;
+            }
+            return Name.CompareTo(other.Name);
+        }
+
 
         public string Name 
         { 
