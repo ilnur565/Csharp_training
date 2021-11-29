@@ -16,21 +16,26 @@ namespace addressbook_web_tests
         [SetUp]
         public void Preconditions()
         {
-            var contact = new ContactCreationtData("Ilnur_", "WWW_");
+            var contact = new ContactCreationData("Ilnur_", "WWW_");
             app.Contact.CreateContactIfIsNotExsist(1);
         }
 
         [Test]
         public void ContactRemovalTest()
         {
+            List<ContactCreationData> oldContacts = app.Contact.GetContactList();
 
-            app.Contact.ContactRemovalTest(1);
+            app.Contact.ContactRemovalTest(0);
+            List<ContactCreationData> newContacts = app.Contact.GetContactList();
+            oldContacts.RemoveAt(0);
+            Assert.AreEqual(oldContacts, newContacts);
 
-           /* public void SelectContatct(int index)
-            {
-                driver.FindElement(By.Id("" + index + "")).Click();
-            }
-            driver.FindElement(By.XPath("//input[@ type='button'])"));*/
+
+            /* public void SelectContatct(int index)
+             {
+                 driver.FindElement(By.Id("" + index + "")).Click();
+             }
+             driver.FindElement(By.XPath("//input[@ type='button'])"));*/
         }
 
         [Test]

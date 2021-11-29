@@ -53,7 +53,7 @@ namespace addressbook_web_tests
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
-            System.Console.Out.Write(oldGroups.Count+newGroups.Count);
+            System.Console.Out.Write(Convert.ToString(oldGroups.Count)+newGroups.Count);
             //app.Auth.Logout();
           
 

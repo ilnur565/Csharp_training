@@ -14,7 +14,21 @@ namespace addressbook_web_tests
         public ContactHelper(ApplicationManager manager) : base (manager)
         { 
         }
-      
+
+        public List<ContactCreationData> GetContactList()
+        {
+            List<ContactCreationData> contacts =new List<ContactCreationData>();
+            manager.Navigator.GoToContactsPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("(//tr[@name='entry'])"));
+            string[] s;
+            foreach (IWebElement element in elements)
+            {
+                s = element.Text.Split(' ');
+                ContactCreationData contact = new ContactCreationData(s[1], s[0]);
+                contacts.Add(contact);
+            }
+            return contacts;
+        }
 
         public ContactHelper SubmitNewContact()
         {
@@ -22,7 +36,7 @@ namespace addressbook_web_tests
             return this;
         }
 
-        public ContactHelper ContactCreation(ContactCreationtData contact)
+        public ContactHelper ContactCreation(ContactCreationData contact)
         {
             manager.Navigator.GoToContactsPage();
             InitContactCreation();
@@ -52,7 +66,7 @@ namespace addressbook_web_tests
             return this;
         }
 
-        public ContactHelper FillContactForm(ContactCreationtData contact)
+        public ContactHelper FillContactForm(ContactCreationData contact)
         {
 
             Type(By.Name("firstname"), contact.Firstname);
@@ -112,14 +126,14 @@ namespace addressbook_web_tests
             manager.Navigator.GoToContactsPage();
             if(!IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]")) )
             {
-                var contact = new ContactCreationtData("Ilnur_V2", "WWW_V2");
+                var contact = new ContactCreationData("Ilnur_V2", "WWW_V2");
                 ContactCreation(contact);
             }
         }
 
         public ContactHelper SelectContact( int index)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" +( index +1)+ "]")).Click();
             return this;
         }
         public ContactHelper SelectALLContact()
@@ -135,12 +149,12 @@ namespace addressbook_web_tests
         public ContactHelper ClearContact( int index)
         {
             manager.Navigator.GoToContactsPage();
-            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + (index +1)+ "]")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
             driver.FindElement(By.Name("lastname")).Clear();
             return this;
         }
-        public ContactHelper EditContact(ContactCreationtData contact, int value)
+        public ContactHelper EditContact(ContactCreationData contact, int value)
         {
             ClearContact(value);
             FillContactForm(contact);
