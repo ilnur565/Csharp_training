@@ -14,25 +14,32 @@ namespace addressbook_web_tests
         public ContactHelper(ApplicationManager manager) : base (manager)
         { 
         }
+        private List<ContactCreationData> contactCache = null;
 
         public List<ContactCreationData> GetContactList()
         {
-            List<ContactCreationData> contacts =new List<ContactCreationData>();
-            manager.Navigator.GoToContactsPage();
-            ICollection<IWebElement> elements = driver.FindElements(By.XPath("(//tr[@name='entry'])"));
-            string[] s;
-            foreach (IWebElement element in elements)
+            if (contactCache == null)
             {
-                s = element.Text.Split(' ');
-                ContactCreationData contact = new ContactCreationData(s[1], s[0]);
-                contacts.Add(contact);
+                contactCache = new List<ContactCreationData>();
+                manager.Navigator.GoToContactsPage();
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath("(//tr[@name='entry'])"));
+                string[] s;
+                foreach (IWebElement element in elements)
+                {
+                    s = element.Text.Split(' ');
+                    ContactCreationData contact = new ContactCreationData(s[1], s[0]);
+                    contactCache.Add(contact);
+                }
             }
-            return contacts;
+
+            
+            return new List < ContactCreationData > (contactCache);
         }
 
         public ContactHelper SubmitNewContact()
         {
             driver.FindElement(By.CssSelector("input:nth-child(87)")).Click();
+            contactCache = null;
             return this;
         }
 
@@ -144,6 +151,7 @@ namespace addressbook_web_tests
         public ContactHelper RemoveContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            contactCache = null;
             return this;
         }
         public ContactHelper ClearContact( int index)
@@ -164,6 +172,7 @@ namespace addressbook_web_tests
         }
         public ContactHelper SibmitContactModification() {
             driver.FindElement(By.XPath("//input[@type='submit']")).Click();
+            contactCache = null;
             return this;
         }
     }

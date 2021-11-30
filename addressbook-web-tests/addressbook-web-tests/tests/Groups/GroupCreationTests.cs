@@ -34,6 +34,8 @@ namespace addressbook_web_tests
                 .ReturnToGroupsPage();
             //app.Auth.Logout();
         }*/
+
+
         [Test]
         public void GroupCreationTest()
         {

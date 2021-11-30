@@ -25,14 +25,14 @@ namespace addressbook_web_tests
         {
             List<ContactCreationData> oldContacts = app.Contact.GetContactList();
             //System.Console.Out.Write(oldContacts.Count);
-            var contact = new ContactCreationData("first", "first");
+            var contact = new ContactCreationData("firstf", "firstsfsdf");
            app.Contact.ContactCreation(contact);
-            var contact1 = new ContactCreationData("Second", "Second");
-            app.Contact.ContactCreation(contact1);
+            /*var contact1 = new ContactCreationData("Second", "Second");
+            app.Contact.ContactCreation(contact1);*/
 
             List<ContactCreationData> newContacts = app.Contact.GetContactList();
             oldContacts.Add(contact);
-            oldContacts.Add(contact1);
+            //oldContacts.Add(contact1);
             //Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
 
 
