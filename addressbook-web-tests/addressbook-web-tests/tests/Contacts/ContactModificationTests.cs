@@ -18,17 +18,19 @@ namespace addressbook_web_tests
         {
             List<ContactCreationData> oldContacts = app.Contact.GetContactList();
 
-            var contact1 = new ContactCreationData("ILNUR&^&", "FFFFFFFFr");
+            var contact1 = new ContactCreationData("ILNdf", "Frdf");
+            oldContacts[0].Firstname = contact1.Firstname;
+            oldContacts[0].Lastname = contact1.Lastname;
+
             app.Contact.EditContact(contact1, 0);
 
             List<ContactCreationData> newContacts = app.Contact.GetContactList();
-            
-           // oldContacts.Add(contact1);
 
+            
             oldContacts.Sort();
             newContacts.Sort();
 
-
+            //// тестовый коммит
 
             Assert.AreEqual(oldContacts, newContacts);
 

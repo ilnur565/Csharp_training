@@ -49,6 +49,12 @@ namespace addressbook_web_tests
         }
 
         private List<GroupData> groupCache = null;
+
+        public int GetGroupCount()
+        {
+            return driver.FindElements(By.CssSelector("span.group")).Count;
+        }
+
         public List<GroupData> GetGroupList()
         {
             if (groupCache == null)
