@@ -29,7 +29,7 @@ namespace addressbook_web_tests
             newContacts.Sort();
 
 
-
+            Assert.AreEqual(oldContacts, newContacts);
             Assert.AreEqual(oldContacts, newContacts);
 
             /* ContactCreationtData contactData = new ContactCreationtData("345");
