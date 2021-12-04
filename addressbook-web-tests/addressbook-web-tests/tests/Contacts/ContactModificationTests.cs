@@ -32,7 +32,7 @@ namespace addressbook_web_tests
 
             //// тестовый коммит
 
-            Assert.AreEqual(oldContacts, newContacts);
+           
 
             /* ContactCreationtData contactData = new ContactCreationtData("345");
              contact.Lastname = "";
