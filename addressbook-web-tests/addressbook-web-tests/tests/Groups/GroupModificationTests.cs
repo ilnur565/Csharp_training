@@ -20,7 +20,7 @@ namespace addressbook_web_tests
         [Test]
         public void GroupModificationTest()
         {
-            GroupData newData = new GroupData("ZZddsscZ");
+            GroupData newData = new GroupData("ZZdadsscZ");
             newData.Header = null;
             newData.Footer = null;
             
@@ -41,7 +41,7 @@ namespace addressbook_web_tests
 
                 if (group.Id == oldData.Id)
                 {
-                    Assert.AreEqual(newData.Name, oldData.Name); 
+                    Assert.AreEqual(newData.Name, group.Name); 
                 }
                 
             }

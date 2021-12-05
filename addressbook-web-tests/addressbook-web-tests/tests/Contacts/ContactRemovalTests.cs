@@ -24,15 +24,19 @@ namespace addressbook_web_tests
         public void ContactRemovalTest()
         {
             List<ContactCreationData> oldContacts = app.Contact.GetContactList();
-
+            ContactCreationData oldData = oldContacts[0];
             app.Contact.ContactRemovalTest(0);
             Assert.AreEqual(oldContacts.Count - 1, app.Contact.GetContactCount());
 
             List<ContactCreationData> newContacts = app.Contact.GetContactList();
+            ContactCreationData newData = newContacts[0];
             oldContacts.RemoveAt(0);
             Assert.AreEqual(oldContacts, newContacts);
 
-
+            foreach (ContactCreationData contact in newContacts)
+            {
+                Assert.AreNotEqual(contact.Id, oldData.Id);
+            }
             /* public void SelectContatct(int index)
              {
                  driver.FindElement(By.Id("" + index + "")).Click();
