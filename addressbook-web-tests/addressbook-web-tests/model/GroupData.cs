@@ -8,20 +8,24 @@ namespace addressbook_web_tests
 {
     public class GroupData : IEquatable<GroupData>, IComparable<GroupData>  // определяем ф-ю сравнения; Класс GroupData наследует IEquatable
     {
-        private string name;
+
         private string header=""; 
         private string footer="";
+        
 
         public GroupData (string name) //конструктор 
         {
-            this.name = name;
+            Name = name;
         }
-     /*   public GroupData(string name, string header, string footer) //конструктор (не применяем так как сложно запомнить порядок если много параметров)
-        {
-            this.name = name;
-            this.header = header;
-            this.footer = footer;
-        }*/
+        /*   public GroupData(string name, string header, string footer) //конструктор (не применяем так как сложно запомнить порядок если много параметров)
+           {
+               this.name = name;
+               this.header = header;
+               this.footer = footer;
+           }*/
+
+        public string Id { get; set; }
+
         public bool Equals(GroupData other)
         {
             if (Object.ReferenceEquals(other, null))
@@ -51,18 +55,7 @@ namespace addressbook_web_tests
         }
 
 
-        public string Name 
-        { 
-            get
-            {
-                return name;
-            }
-            set
-            {
-                name = value;
-            }
-        
-        }
+        public string Name { get; set; }
         public string Header
         { 
             get
