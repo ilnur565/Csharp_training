@@ -18,7 +18,7 @@ namespace addressbook_web_tests
         {
             List<ContactCreationData> oldContacts = app.Contact.GetContactList();
 
-            var contact1 = new ContactCreationData("ILNUR&^&", "FFFFFFFFr");
+            var contact1 = new ContactCreationData("ILNU", "F1");
             app.Contact.EditContact(contact1, 0);
 
             List<ContactCreationData> newContacts = app.Contact.GetContactList();
@@ -27,9 +27,11 @@ namespace addressbook_web_tests
 
             oldContacts.Sort();
             newContacts.Sort();
+            oldContacts[0].Firstname = contact1.Firstname;
+            oldContacts[0].Lastname = contact1.Lastname;
 
 
-            Assert.AreEqual(oldContacts, newContacts);
+
             Assert.AreEqual(oldContacts, newContacts);
 
             /* ContactCreationtData contactData = new ContactCreationtData("345");

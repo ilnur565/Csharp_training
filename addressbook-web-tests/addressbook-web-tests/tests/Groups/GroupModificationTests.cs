@@ -20,7 +20,7 @@ namespace addressbook_web_tests
         [Test]
         public void GroupModificationTest()
         {
-            GroupData newData = new GroupData("ZZZ");
+            GroupData newData = new GroupData("ZZsscZ");
             newData.Header = null;
             newData.Footer = null;
 
