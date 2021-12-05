@@ -18,9 +18,10 @@ namespace addressbook_web_tests
         {
             List<ContactCreationData> oldContacts = app.Contact.GetContactList();
 
-            var contact1 = new ContactCreationData("ILNU", "F1");
+            var contact1 = new ContactCreationData("ILNdU", "dF1");
             app.Contact.EditContact(contact1, 0);
 
+            Assert.AreEqual(oldContacts.Count, app.Contact.GetContactCount());
             List<ContactCreationData> newContacts = app.Contact.GetContactList();
             
            // oldContacts.Add(contact1);

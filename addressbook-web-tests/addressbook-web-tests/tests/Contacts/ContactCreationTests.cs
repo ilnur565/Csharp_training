@@ -29,13 +29,13 @@ namespace addressbook_web_tests
            app.Contact.ContactCreation(contact);
             /*var contact1 = new ContactCreationData("Second", "Second");
             app.Contact.ContactCreation(contact1);*/
-
+            Assert.AreEqual(oldContacts.Count+1, app.Contact.GetContactCount());
             List<ContactCreationData> newContacts = app.Contact.GetContactList();
             oldContacts.Add(contact);
             //oldContacts.Add(contact1);
             //Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
 
-
+            
             oldContacts.Sort();
             newContacts.Sort();
             
