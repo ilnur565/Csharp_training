@@ -59,7 +59,7 @@ namespace addressbook_web_tests
             return Lastname.CompareTo(other.Lastname);
             //return -1;
         }
-
+        public string Id { get; set; }
 
         public string Firstname
         {

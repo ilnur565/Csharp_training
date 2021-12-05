@@ -23,17 +23,27 @@ namespace addressbook_web_tests
                 contactCache = new List<ContactCreationData>();
                 manager.Navigator.GoToContactsPage();
                 ICollection<IWebElement> elements = driver.FindElements(By.XPath("(//tr[@name='entry'])"));
-                string[] s;
+                
                 foreach (IWebElement element in elements)
                 {
-                    s = element.Text.Split(' ');
-                    ContactCreationData contact = new ContactCreationData(s[1], s[0]);
-                    contactCache.Add(contact);
+                    var td = element.FindElements(By.TagName("td"));
+                    contactCache.Add(new ContactCreationData(td[2].Text, td[1].Text)
+                    {
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
+
                 }
             }
 
             
             return new List < ContactCreationData > (contactCache);
+        }
+
+        public int GetContactCount()
+
+        {
+            manager.Navigator.GoToContactsPage();
+            return driver.FindElements(By.XPath("(//tr[@name='entry'])")).Count;
         }
 
         public ContactHelper SubmitNewContact()

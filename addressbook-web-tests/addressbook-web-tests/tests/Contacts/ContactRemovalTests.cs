@@ -26,6 +26,8 @@ namespace addressbook_web_tests
             List<ContactCreationData> oldContacts = app.Contact.GetContactList();
 
             app.Contact.ContactRemovalTest(0);
+            Assert.AreEqual(oldContacts.Count - 1, app.Contact.GetContactCount());
+
             List<ContactCreationData> newContacts = app.Contact.GetContactList();
             oldContacts.RemoveAt(0);
             Assert.AreEqual(oldContacts, newContacts);
