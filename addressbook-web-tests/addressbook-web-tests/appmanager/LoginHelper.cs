@@ -40,29 +40,23 @@ namespace addressbook_web_tests
         {
             return IsElementPresent(By.LinkText("Logout"));
         }
-       
+
 
 
 
         public bool IsLoggedIn(AccountData account)
         {
-            bool z=false;
-            try
-            {
+            return IsLoggedIn() && GetLoggetUsername() == account.Username;
+        }
 
-                string a = driver.FindElement(By.LinkText("Logout")).Text;//Проверили наличие Logout
 
-                string b = driver.FindElement(By.TagName("b")).Text; // нашли на странице текст:(admin)  
-                string c = "(" + account.Username + ")"; // записали в переменную с название уз
-                if (b == c)
-                {
-                    z = true;
-                    System.Console.Out.Write(z);
-                }
-            }
-            catch { }
 
-            return IsLoggedIn() && z;
+        public string GetLoggetUsername()
+        {
+
+            string text = driver.FindElement(By.TagName("b")).Text;
+
+            return text.Substring(1, text.Length - 2);
         }
 
 
