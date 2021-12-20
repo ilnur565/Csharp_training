@@ -19,7 +19,10 @@ namespace addressbook_web_tests
             Assert.AreEqual(fromTable, fromForm);
             Assert.AreEqual(fromTable.Address, fromForm.Address);
             Assert.AreEqual(fromTable.Allphones, fromForm.Allphones);
-            Console.WriteLine(fromTable.Allphones);
+            //Console.WriteLine(fromForm.Allphones);
+            Assert.AreEqual(fromTable.Allemails, fromForm.Allemails);
+            Console.WriteLine(fromForm.Allemails);
+            Console.WriteLine(fromTable.Allemails);
         }
 
         [Test]

@@ -18,6 +18,10 @@ namespace addressbook_web_tests
         public string address = "";
         public string home = "";
         private string allPhones;
+        private string email;
+        private string email2;
+        private string email3;
+        private string allEmails;
 
         public ContactCreationData(string firstname, string lastname)
         {
@@ -144,14 +148,35 @@ namespace addressbook_web_tests
                 else
                 {
 
-                    return (CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone)).Trim(); ;
+                    return (CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone)).Trim(); 
                 }
             } 
 
             set {
                 allPhones = value;
             }
-        } 
+        }
+
+        public string Email { get; set; }
+        public string Email2 { get; set; }
+        public string Email3 { get; set; }
+        public string Allemails
+        {
+            get
+            {
+                if(allEmails != null)
+                {
+                    return allEmails;
+                }
+                else
+                {
+                    return (CleanUp(Email) + CleanUp(Email2) + CleanUp(Email3)).Trim(); 
+                }
+            }
+            set { allEmails = value; }
+
+        }
+
 
         public string CleanUp(string phone)
         {
