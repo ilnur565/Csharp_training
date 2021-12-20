@@ -64,16 +64,33 @@ namespace addressbook_web_tests
                 ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
                 foreach (IWebElement element in elements)
                 {
-                    GroupData group = new GroupData(element.Text) {
+                    GroupData group = new GroupData(null)
+                    {
                         Id = element.FindElement(By.TagName("input")).GetAttribute("value")
                     };
-                    
+
                     groupCache.Add(group);
                 }
-            }
-           
+                string allGroupNames = driver.FindElement(By.CssSelector("div#content form")).Text;
+                string[] parts = allGroupNames.Split('\n'); allGroupNames.Split();
+                int shift = groupCache.Count - parts.Length;
+                for (int i = 0; i < groupCache.Count; i++)
+                {
+                    if (i<shift )
+                    {
+                        groupCache[i].Name = "";
+                    }
+                    else
+                    {
+                        groupCache[i].Name = parts[i-shift].Trim();
 
-            return new List<GroupData>(groupCache);
+                    }
+                    
+
+                }
+    
+            }
+                return new List<GroupData>(groupCache);
         }
 
         public GroupHelper Remove(int p)

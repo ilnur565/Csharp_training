@@ -34,15 +34,25 @@ namespace addressbook_web_tests
                 .ReturnToGroupsPage();
             //app.Auth.Logout();
         }*/
-
-
-        [Test]
-        public void GroupCreationTest()
+        public static IEnumerable<GroupData> RandomGroupDataProvider() 
         {
+            List<GroupData> groups = new List<GroupData>();
+            for(int i = 0; i<5; i++)
+            {
+                groups.Add(new GroupData(GenerateRandomString(30))
+                {
+                    Header= GenerateRandomString(100),
+                    Footer= GenerateRandomString(100)
+                });
+            }
+            return groups;
+        }
 
-            var group = new GroupData("Ilnur");
-            group.Header = "1234";
-            group.Footer = "2";
+     
+
+       // [Test, TestCaseSource("RandomGroupDataProvider")]
+        public void GroupCreationTest(GroupData group)
+        {
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
@@ -65,19 +75,19 @@ namespace addressbook_web_tests
         [Test]
         public void EmptyGroupCreationTest()
         {
-            
-            var group = new GroupData("");
-            group.Header = "";
-            group.Footer = "";
+
+            var group1 = new GroupData("c");
+            group1.Header = "s";
+            group1.Footer = "g";
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
-            app.Groups.Create(group);
+            app.Groups.Create(group1);
             Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
             List<GroupData> newGroups = app.Groups.GetGroupList(); // Контейнер или коллекция т.е объект который хранит набор других объектов
 
 
-            oldGroups.Add(group);
+            oldGroups.Add(group1);
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);

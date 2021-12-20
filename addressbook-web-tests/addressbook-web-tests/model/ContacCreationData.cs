@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace addressbook_web_tests
@@ -16,12 +17,13 @@ namespace addressbook_web_tests
         public string company = "";
         public string address = "";
         public string home = "";
+        private string allPhones;
 
         public ContactCreationData(string firstname, string lastname)
         {
             this.firstname = firstname;
-            this.lastname = lastname;
-
+            this.Lastname = lastname;
+           
         }
         public bool Equals(ContactCreationData other)
         {
@@ -74,19 +76,8 @@ namespace addressbook_web_tests
             }
 
         }
-        public string Lastname
-        {
-
-            get
-            {
-                return lastname;
-            }
-            set
-            {
-                lastname = value;
-            }
-
-        }
+        public string Lastname { get; set; }
+        
         public string Middlename
         {
 
@@ -139,19 +130,40 @@ namespace addressbook_web_tests
             }
 
         }
-        public string Address
+        public string Address { get; set; }
+        public string HomePhone { get; set; }
+        public string MobilePhone { get; set; }
+        public string WorkPhone { get; set; }
+        public string Allphones
         {
+            get 
+            { if (allPhones != null)
+                {
+                    return allPhones;
+                }
+                else
+                {
 
-            get
-            {
-                return address;
-            }
-            set
-            {
-                address = value;
-            }
+                    return (CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone)).Trim(); ;
+                }
+            } 
 
+            set {
+                allPhones = value;
+            }
+        } 
+
+        public string CleanUp(string phone)
+        {
+            if (phone==null|| phone=="")
+            { return ""; }
+
+            return Regex.Replace(phone, "[ -()]", "")+"\r\n";
+
+           
         }
+        
+
         public string Home
         {
 
