@@ -21,11 +21,31 @@ namespace addressbook_web_tests
     public class ContactCreationTests : AuthTestBase
     {
         [Test]
-        public void ContactCreation()
+
+       public static IEnumerable<ContactCreationData> RandomContactDataProvider()
+        {
+            List<ContactCreationData> contacts = new List<ContactCreationData>();
+
+            for (int i =0; i<5; i++)
+            {
+                contacts.Add(new ContactCreationData(GenerateRandomString(30), GenerateRandomString(30))
+                {
+                    Address = GenerateRandomString(100),
+                    HomePhone = GenerateRandomString(100),
+                    MobilePhone = GenerateRandomString(100),
+                    WorkPhone = GenerateRandomString(100),
+                    Email = GenerateRandomString(100)
+                });
+            }
+            return contacts;
+        }
+
+        [Test, TestCaseSource("RandomContactDataProvider")]
+        public void ContactCreation(ContactCreationData contact)
         {
             List<ContactCreationData> oldContacts = app.Contact.GetContactList();
             //System.Console.Out.Write(oldContacts.Count);
-            var contact = new ContactCreationData("firstf", "firstsfsdf");
+            //var contact = new ContactCreationData("firstf", "firstsfsdf");
            app.Contact.ContactCreation(contact);
             /*var contact1 = new ContactCreationData("Second", "Second");
             app.Contact.ContactCreation(contact1);*/

@@ -61,37 +61,58 @@ namespace addressbook_web_tests
             {
                 groupCache = new List<GroupData>();
                 manager.Navigator.GoToGroupsPage();
-                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath("(//span[@class='group'])"));
                 foreach (IWebElement element in elements)
                 {
-                    GroupData group = new GroupData(null)
+                    groupCache.Add(new GroupData(element.Text)
                     {
                         Id = element.FindElement(By.TagName("input")).GetAttribute("value")
-                    };
-
-                    groupCache.Add(group);
+                    });
                 }
-                string allGroupNames = driver.FindElement(By.CssSelector("div#content form")).Text;
-                string[] parts = allGroupNames.Split('\n'); allGroupNames.Split();
-                int shift = groupCache.Count - parts.Length;
-                for (int i = 0; i < groupCache.Count; i++)
-                {
-                    if (i<shift )
-                    {
-                        groupCache[i].Name = "";
-                    }
-                    else
-                    {
-                        groupCache[i].Name = parts[i-shift].Trim();
-
-                    }
-                    
-
-                }
-    
             }
-                return new List<GroupData>(groupCache);
+            return new List<GroupData>(groupCache);
         }
+        /*
+                public List<GroupData> GetGroupList()
+                {
+
+
+
+                    if (groupCache == null)
+                    {
+                        groupCache = new List<GroupData>();
+                        manager.Navigator.GoToGroupsPage();
+                        ICollection<IWebElement> elements = driver.FindElements(By.XPath("(//span[@class='group'])"));
+                        foreach (IWebElement element in elements)
+                        {
+                            GroupData group = new GroupData(null)
+                            {
+                                Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                            };
+
+                            groupCache.Add(group);
+                        }
+                        string allGroupNames = driver.FindElement(By.CssSelector("div#content form")).Text;
+                        string[] parts = allGroupNames.Split('\n');*//* allGroupNames.Split();*//*
+                        int shift = groupCache.Count - parts.Length;
+                        for (int i = 0; i < groupCache.Count; i++)
+                        {
+                            if (i<shift )
+                            {
+                                groupCache[i].Name = "";
+                            }
+                            else
+                            {
+                                groupCache[i].Name =parts[i-shift].Trim();
+
+                            }
+
+
+                        }
+
+                    }
+                        return new List<GroupData>(groupCache);
+                }*/
 
         public GroupHelper Remove(int p)
         {

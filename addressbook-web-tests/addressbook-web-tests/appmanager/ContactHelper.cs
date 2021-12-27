@@ -29,20 +29,112 @@ namespace addressbook_web_tests
             string address = cells[3].Text;
             string allPhones = cells[5].Text;
             string allEmails = cells[4].Text;
-
+            
             return new ContactCreationData(firstname, lastname)
             {
                 Address = address,
                 Allphones = allPhones,
-                Allemails = allEmails
+                AllEmails = allEmails,
                 
+
             };
+        }
+
+        public string ConvertContactDataToString(ContactCreationData contact)
+        {
+            return GetContactString(contact);
+
+           /* return contact.Firstname + " "
+                + contact.Lastname + "\r\n"
+                 + contact.Address + "\r\n\r\n"
+                + "H: " + contact.HomePhone + "\r\n"
+                + "M: " + contact.MobilePhone + "\r\n"
+                + "W: " + contact.WorkPhone + "\r\n"
+                + contact.Email + "\r\n"
+                + contact.Email2 + "\r\n"
+                + contact.Email3 + "\r\n";*/
+
+        }
+
+        public string GetContactString(ContactCreationData contact)
+        {
+            string total = "";
+            if (contact.Firstname != null && contact.Firstname != "")
+            {
+                total += contact.Firstname;
+                if (contact.Lastname != null && contact.Lastname != "")
+                    total += " ";
+                else
+                {
+                    if ((contact.Address != null && contact.Address != "")
+                        || (contact.AllPhonesWithPrefix != null && contact.AllPhonesWithPrefix != "")
+                        || (contact.AllEmails != null && contact.AllEmails != ""))
+                        total += "\r\n";
+                }
+            }
+
+            if (contact.Lastname != null && contact.Lastname != "")
+            {
+                total += contact.Lastname;
+                if ((contact.Address != null && contact.Address != "")
+                    || (contact.AllPhonesWithPrefix != null && contact.AllPhonesWithPrefix != "")
+                    || (contact.AllEmails != null && contact.AllEmails != ""))
+                    total += "\r\n";
+            }
+
+            if (contact.Address != null && contact.Address != "")
+            {
+                total += contact.Address;
+                if ((contact.AllPhonesWithPrefix != null && contact.AllPhonesWithPrefix != "")
+                        || (contact.AllEmails != null && contact.AllEmails != ""))
+                    total += "\r\n";
+            }
+
+            if (contact.AllPhonesWithPrefix != null && contact.AllPhonesWithPrefix != "")
+            {
+                if ((contact.Firstname != null && contact.Firstname != "")
+                    || (contact.Lastname != null && contact.Lastname != "")
+                    || (contact.Address != null && contact.Address != ""))
+                    total += "\r\n";
+                total += contact.AllPhonesWithPrefix;
+                if (contact.AllEmails != null && contact.AllEmails != "")
+                    total += "\r\n";
+                else total = total.Trim();
+            }
+
+            if (contact.AllEmails != null && contact.AllEmails != "")
+            {
+                if ((contact.Firstname != null && contact.Firstname != "")
+                    || (contact.Lastname != null && contact.Lastname != "")
+                    || (contact.Address != null && contact.Address != "")
+                    || (contact.AllPhonesWithPrefix != null && contact.AllPhonesWithPrefix != ""))
+                    total += "\r\n";
+                total += contact.AllEmails.Trim();
+            }
+            return total;
+
+        }
+
+
+
+
+        public string GetContactInformationFromDeatails(int index)
+        {
+            GoToContactDetails(index);
+            return driver.FindElement(By.XPath("//div[@id='content']")).Text;
+        }
+
+        public void GoToContactDetails(int index )
+        {
+            manager.Navigator.GoToHomePage();
+            driver.FindElement(By.XPath("(//img[@ title='Details'])["+(index+1)+"]")).Click();
+
         }
 
         public ContactCreationData GetContactInformationFromEditForm(int index)
         {
             manager.Navigator.GoToHomePage();
-            InitContactModification(0);
+            InitContactModification(index);
             string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
             string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
             string address = driver.FindElement(By.Name("address")).GetAttribute("value");
@@ -58,6 +150,7 @@ namespace addressbook_web_tests
                 HomePhone = homePhone,
                 MobilePhone = mobilePhone,
                 WorkPhone= workPhone,
+                
                 Email = email,
                 Email2 = email2,
                 Email3 = email3
@@ -259,6 +352,13 @@ namespace addressbook_web_tests
             manager.Navigator.GoToContactsPage();
            // Size []s = new Size[2];
             return  driver.FindElement(By.XPath("//img[@ title='Addressbook']")).Size;
+
+        }
+        public void  PictureClick(int index)
+        {
+            manager.Navigator.GoToContactsPage();
+            // Size []s = new Size[2];
+             driver.FindElement(By.XPath("(//img[@ title='Details'])[" + index+"]")).Click();
 
         }
         public string CleanUpSize(string size)

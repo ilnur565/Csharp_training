@@ -17,11 +17,14 @@ namespace addressbook_web_tests
         public string company = "";
         public string address = "";
         public string home = "";
-        private string allPhones;
+        private string allPhones = "";
+        private string mobile = "";
+        private string work = "";
         private string email;
         private string email2;
         private string email3;
         private string allEmails;
+        //private string allElements;
 
         public ContactCreationData(string firstname, string lastname)
         {
@@ -140,15 +143,34 @@ namespace addressbook_web_tests
         public string WorkPhone { get; set; }
         public string Allphones
         {
-            get 
-            { if (allPhones != null)
+            get
+            {
+                if (allPhones != null)
                 {
                     return allPhones;
                 }
                 else
                 {
 
-                    return (CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone)).Trim(); 
+                    return CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone).Trim();
+                }
+            }
+                    set
+            {
+                allPhones = value;
+            }
+        }
+        public string AllPhonesWithPrefix
+        {
+            get 
+            { if (allPhones != null)
+                {
+                    return SetPhonePrefix(DoLineFeed(HomePhone), 0) + SetPhonePrefix(DoLineFeed(MobilePhone), 1) + SetPhonePrefix(DoLineFeed(WorkPhone), 2);
+                }
+                else
+                {
+
+                    return SetPhonePrefix (DoLineFeed(HomePhone),0) + SetPhonePrefix(DoLineFeed(MobilePhone), 1) + SetPhonePrefix(DoLineFeed(WorkPhone),2); 
                 }
             } 
 
@@ -156,11 +178,29 @@ namespace addressbook_web_tests
                 allPhones = value;
             }
         }
+        public String DoLineFeed(string line)
+        {
+            if (string.IsNullOrEmpty(line)) {  return ""; }
+            return line + "\r\n";
 
+        }
+        public string SetPhonePrefix(string phone, int index)
+        {
+            if (string.IsNullOrEmpty(phone)) {  return "";  }
+
+            else
+            {
+                if (index == 0) return "H: " + phone;
+                if (index == 1) return "M: " + phone;
+                if (index == 2) return "W: " + phone;
+            }
+            return "error";
+        }
+        
         public string Email { get; set; }
         public string Email2 { get; set; }
         public string Email3 { get; set; }
-        public string Allemails
+        public string AllEmails
         {
             get
             {
@@ -173,12 +213,28 @@ namespace addressbook_web_tests
                     return (CleanUp(Email) + CleanUp(Email2) + CleanUp(Email3)).Trim(); 
                 }
             }
-            set { allEmails = value; }
+            set { 
+                allEmails = value; }
 
         }
+     /*   public string AllElements {
+            get
+            {
+                if (allElements!=null)
+                {
+                    return allElements;
+                }
+                else 
+                {
+                    return (Firstname + Lastname + Address + Allphones + Allemails + AllElements);
+                }
+                
+            }
 
+            set { allElements = value; } 
+        }*/
 
-        public string CleanUp(string phone)
+    public string CleanUp(string phone)
         {
             if (phone==null|| phone=="")
             { return ""; }

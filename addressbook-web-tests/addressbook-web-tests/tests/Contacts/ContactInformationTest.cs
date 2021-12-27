@@ -20,12 +20,14 @@ namespace addressbook_web_tests
             Assert.AreEqual(fromTable.Address, fromForm.Address);
             Assert.AreEqual(fromTable.Allphones, fromForm.Allphones);
             //Console.WriteLine(fromForm.Allphones);
-            Assert.AreEqual(fromTable.Allemails, fromForm.Allemails);
-            Console.WriteLine(fromForm.Allemails);
-            Console.WriteLine(fromTable.Allemails);
+            Assert.AreEqual(fromTable.AllEmails, fromForm.AllEmails);
+            Console.WriteLine(fromForm.AllEmails);
+            Console.WriteLine(fromTable.AllEmails);
         }
-
         [Test]
+   
+
+        
 
         public void ResultNumberTest()
         {
@@ -59,5 +61,17 @@ namespace addressbook_web_tests
         {
             Console.WriteLine(app.Contact.GetNumberOfSearchResultsLabel());
         }
+        [Test]
+        public void ContactDetailsComplianceTest() {
+            int index = 0;
+            ContactCreationData fromForm = app.Contact.GetContactInformationFromEditForm(index);
+            Console.WriteLine(app.Contact.GetContactInformationFromDeatails(index));
+            
+            Console.WriteLine(app.Contact.ConvertContactDataToString(fromForm));
+         
+            Assert.AreEqual(app.Contact.GetContactInformationFromDeatails(index), app.Contact.ConvertContactDataToString(fromForm));
+            
+        }
+       
     }
 }

@@ -3,6 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+
+using System.IO;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -34,23 +36,41 @@ namespace addressbook_web_tests
                 .ReturnToGroupsPage();
             //app.Auth.Logout();
         }*/
-        public static IEnumerable<GroupData> RandomGroupDataProvider() 
+        public static IEnumerable<GroupData> GroupDataFromFile()
         {
             List<GroupData> groups = new List<GroupData>();
-            for(int i = 0; i<5; i++)
+            string[] lines = File.ReadAllLines(@"C:\Users\User\source\repos\Csharp_training\addressbook-web-tests\addressbook-web-tests\group.csv");
+
+            foreach (string l in lines)
+            {
+               string[] parts= l.Split(',');
+                groups.Add(new GroupData(parts[0])
+                {
+                    Header = parts[1],
+                    Footer = parts[2]
+                });
+
+            }
+            return groups;
+        }
+
+        public static IEnumerable<GroupData> RandomGroupDataProvider()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            for (int i = 0; i < 5; i++)
             {
                 groups.Add(new GroupData(GenerateRandomString(30))
                 {
-                    Header= GenerateRandomString(100),
-                    Footer= GenerateRandomString(100)
+                    Header = GenerateRandomString(100),
+                    Footer = GenerateRandomString(100)
                 });
             }
             return groups;
         }
 
-     
 
-       // [Test, TestCaseSource("RandomGroupDataProvider")]
+
+        [Test, TestCaseSource("GroupDataFromFile")]
         public void GroupCreationTest(GroupData group)
         {
 
@@ -64,7 +84,8 @@ namespace addressbook_web_tests
             oldGroups.Add(group);
             oldGroups.Sort();
             newGroups.Sort();
-            Assert.AreEqual(oldGroups, newGroups);
+           
+            Assert.AreEqual(newGroups, oldGroups);
             System.Console.Out.Write(Convert.ToString(oldGroups.Count)+newGroups.Count);
             //app.Auth.Logout();
           
