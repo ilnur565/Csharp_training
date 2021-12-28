@@ -11,8 +11,11 @@ namespace addressbook_web_tests
 
         private string header=""; 
         private string footer="";
-        
 
+        public GroupData() //конструктор 
+        {
+            
+        }
         public GroupData (string name) //конструктор 
         {
             Name = name;

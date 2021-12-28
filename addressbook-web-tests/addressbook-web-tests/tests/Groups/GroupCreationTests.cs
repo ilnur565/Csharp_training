@@ -14,6 +14,8 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using NUnit.Framework;
 using addressbook_web_tests;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace addressbook_web_tests
 {
@@ -36,7 +38,18 @@ namespace addressbook_web_tests
                 .ReturnToGroupsPage();
             //app.Auth.Logout();
         }*/
-        public static IEnumerable<GroupData> GroupDataFromFile()
+
+        public static IEnumerable<GroupData> GroupDataFromXmlFile()
+        {
+            string path = @"C: \Users\User\source\repos\Csharp_training\addressbook-web-tests\addressbook-web-tests\group.xml";
+            
+            
+            return (List<GroupData>) new XmlSerializer(typeof (List<GroupData>)).Deserialize(new StreamReader(path));
+          
+             
+        }
+
+        public static IEnumerable<GroupData> GroupDataFromCsvFile()
         {
             List<GroupData> groups = new List<GroupData>();
             string[] lines = File.ReadAllLines(@"C:\Users\User\source\repos\Csharp_training\addressbook-web-tests\addressbook-web-tests\group.csv");
@@ -70,7 +83,7 @@ namespace addressbook_web_tests
 
 
 
-        [Test, TestCaseSource("GroupDataFromFile")]
+        [Test, TestCaseSource("GroupDataFromXmlFile")]
         public void GroupCreationTest(GroupData group)
         {
 
