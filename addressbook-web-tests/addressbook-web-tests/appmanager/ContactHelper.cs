@@ -243,21 +243,21 @@ namespace addressbook_web_tests
             Type(By.Name("address"), contact.Address);
             //   driver.FindElement(By.Name("photo")).Click();
             Type(By.Name("home"), contact.Home);
-           
-            /*driver.FindElement(By.Name("mobile")).Click();
-            driver.FindElement(By.Name("mobile")).SendKeys("1");
+
+            driver.FindElement(By.Name("mobile")).Click();
+            driver.FindElement(By.Name("mobile")).SendKeys(contact.MobilePhone);
             driver.FindElement(By.Name("work")).Click();
-            driver.FindElement(By.Name("work")).SendKeys("1");
-            driver.FindElement(By.Name("fax")).Click();
-            driver.FindElement(By.Name("fax")).SendKeys("1");
+            driver.FindElement(By.Name("work")).SendKeys(contact.WorkPhone);
+            //driver.FindElement(By.Name("fax")).Click();
+            //driver.FindElement(By.Name("fax")).SendKeys("1");
             driver.FindElement(By.Name("email")).Click();
-            driver.FindElement(By.Name("email")).SendKeys("1");
+            driver.FindElement(By.Name("email")).SendKeys(contact.Email);
             driver.FindElement(By.Name("email2")).Click();
-            driver.FindElement(By.Name("email2")).SendKeys("1");
+            driver.FindElement(By.Name("email2")).SendKeys(contact.Email2);
             driver.FindElement(By.Name("email3")).Click();
-            driver.FindElement(By.Name("email3")).SendKeys("1");
-            driver.FindElement(By.Name("homepage")).Click();
-            driver.FindElement(By.Name("homepage")).SendKeys("1");*/
+            driver.FindElement(By.Name("email2")).SendKeys(contact.Email3);
+            //driver.FindElement(By.Name("homepage")).Click();
+            //driver.FindElement(By.Name("homepage")).SendKeys("1");
             return this;
         }
         public ContactHelper ContactRemovalTest(int b)

@@ -13,6 +13,8 @@ using OpenQA.Selenium.Interactions;
 using NUnit.Framework;
 using addressbook_web_tests;
 using System.IO;
+using System.Xml.Serialization;
+using System.Xml;
 
 
 namespace addressbook_web_tests
@@ -54,14 +56,23 @@ namespace addressbook_web_tests
                     MobilePhone = parts[4],
                     WorkPhone = parts[5],
                     Email = parts[6]
-                });
+
+                });;
 
             }
             return contacts;
         }
+        public static IEnumerable<ContactCreationData> ContactDataFromXmlFile()
+        {
+            string path = @"C: \Users\User\source\repos\Csharp_training\addressbook-web-tests\addressbook-web-tests\contact.xml";
 
 
-        [Test, TestCaseSource("ContactDataFromCsvFile")]
+            return (List<ContactCreationData>)new XmlSerializer(typeof(List<ContactCreationData>)).Deserialize(new StreamReader(path));
+           
+        }
+
+
+        [Test, TestCaseSource("ContactDataFromXmlFile")]
         public void ContactCreation(ContactCreationData contact)
         {
             List<ContactCreationData> oldContacts = app.Contact.GetContactList();

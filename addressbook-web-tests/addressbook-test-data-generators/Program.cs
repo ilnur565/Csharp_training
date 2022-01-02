@@ -84,21 +84,33 @@ namespace addressbook_test_data_generators
                             HomePhone = TestBase.GenerateRandomString(10),
                             MobilePhone = TestBase.GenerateRandomString(10),
                             WorkPhone = TestBase.GenerateRandomString(10),
-                            Email = TestBase.GenerateRandomString(10)
+                            Email = TestBase.GenerateRandomString(10),
+                            Email2 = TestBase.GenerateRandomString(10),
+                            Email3 = TestBase.GenerateRandomString(10)
 
-                        });
+
+                    });
 
                     }
-                 StreamWriter writer = new StreamWriter(@"C:\Users\User\source\repos\Csharp_training\addressbook-web-tests\addressbook-web-tests\contact.csv");
+                 StreamWriter writer = new StreamWriter(@"C:\Users\User\source\repos\Csharp_training\addressbook-web-tests\addressbook-web-tests\contact.xml");
 
 
                 if (format == "csv")
                 {
                     writeContactsToCsvFile(contacts, writer);
                 }
+                if(format =="xml")
+                {
+                    writeContactsToXmlFile(contacts, writer);
+                }
                 writer.Close();
             }
             
+        }
+
+         static void writeContactsToXmlFile(List<ContactCreationData> contacts, StreamWriter writer)
+        {
+            new XmlSerializer(typeof(List<ContactCreationData>)).Serialize(writer, contacts);
         }
 
         /* static void writeGroupsToExcelFile(List<GroupData> groups, string path)
