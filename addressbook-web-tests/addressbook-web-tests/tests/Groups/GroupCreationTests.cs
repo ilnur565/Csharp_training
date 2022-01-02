@@ -16,6 +16,7 @@ using NUnit.Framework;
 using addressbook_web_tests;
 using System.Xml.Serialization;
 using System.Xml;
+using Newtonsoft.Json;
 
 namespace addressbook_web_tests
 {
@@ -48,7 +49,13 @@ namespace addressbook_web_tests
           
              
         }
+        public static IEnumerable<GroupData> GroupDataFromJsonFile()
+        {
+            string path = @"C:\Users\User\source\repos\Csharp_training\addressbook-web-tests\addressbook-web-tests\group.json";
 
+            return JsonConvert.DeserializeObject<List<GroupData>>(
+                 File.ReadAllText(path));
+        }
         public static IEnumerable<GroupData> GroupDataFromCsvFile()
         {
             List<GroupData> groups = new List<GroupData>();
@@ -95,9 +102,9 @@ namespace addressbook_web_tests
 
 
             oldGroups.Add(group);
-            oldGroups.Sort();
-            newGroups.Sort();
            
+            newGroups.Sort();
+            oldGroups.Sort();
             Assert.AreEqual(newGroups, oldGroups);
             System.Console.Out.Write(Convert.ToString(oldGroups.Count)+newGroups.Count);
             //app.Auth.Logout();
