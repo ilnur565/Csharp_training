@@ -12,6 +12,7 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using NUnit.Framework;
 using addressbook_web_tests;
+using System.IO;
 
 
 namespace addressbook_web_tests
@@ -39,8 +40,28 @@ namespace addressbook_web_tests
             }
             return contacts;
         }
+        public static IEnumerable<ContactCreationData> ContactDataFromCsvFile()
+        {
+            List<ContactCreationData> contacts = new List<ContactCreationData>();
+            string[] lines = File.ReadAllLines(@"C:\Users\User\source\repos\Csharp_training\addressbook-web-tests\addressbook-web-tests\contact.csv");
+            foreach (string l in lines)
+            {
+                string[] parts = l.Split(',');
+                contacts.Add(new ContactCreationData(parts[0], parts[1])
+                {
+                    Address = parts[2],
+                    HomePhone = parts[3],
+                    MobilePhone = parts[4],
+                    WorkPhone = parts[5],
+                    Email = parts[6]
+                });
 
-        [Test, TestCaseSource("RandomContactDataProvider")]
+            }
+            return contacts;
+        }
+
+
+        [Test, TestCaseSource("ContactDataFromCsvFile")]
         public void ContactCreation(ContactCreationData contact)
         {
             List<ContactCreationData> oldContacts = app.Contact.GetContactList();

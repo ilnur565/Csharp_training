@@ -26,6 +26,11 @@ namespace addressbook_web_tests
         private string allEmails;
         //private string allElements;
 
+        public ContactCreationData()
+        {
+            
+        }
+
         public ContactCreationData(string firstname, string lastname)
         {
             this.firstname = firstname;
