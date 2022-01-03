@@ -14,7 +14,7 @@ using NUnit.Framework;
 
 namespace addressbook_web_tests
 {
-    public class  TestBase
+    public class TestBase
     {
         protected ApplicationManager app;
 
@@ -28,12 +28,13 @@ namespace addressbook_web_tests
         public static string GenerateRandomString(int max)
         {
             int l = Convert.ToInt32(rnd.NextDouble() * max);
-            StringBuilder builder = new StringBuilder() ;
-            for(int i=0; i<l; i++)
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < l; i++)
             {
-               builder.Append(Convert.ToChar(Convert.ToInt32(32+rnd.NextDouble() * 65)));  
+                builder.Append(Convert.ToChar(Convert.ToInt32(32 + rnd.NextDouble() * 65)));
             }
             return builder.ToString();
         }
+        
     }
 }

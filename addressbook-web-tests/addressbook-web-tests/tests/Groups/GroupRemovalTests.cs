@@ -27,11 +27,14 @@ namespace addressbook_web_tests
         [Test]
         public void GroupRemovalTest()
         {
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
+            //List<GroupData> oldGroups = app.Groups.GetGroupList();
+            GroupData toBeRemoved = oldGroups[0];
+
             GroupData oldData = oldGroups[0];
-            app.Groups.Remove(0);
+            app.Groups.Remove(oldGroups[0]);
             Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount());
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
             oldGroups.RemoveAt(0);
 
             
@@ -39,7 +42,7 @@ namespace addressbook_web_tests
 
             foreach(GroupData group in newGroups)
             {
-                Assert.AreNotEqual(group.Id, oldData.Id);
+                Assert.AreNotEqual(group.Id, toBeRemoved.Id);
             }
 
             /* app.Navigator.GoToGroupsPage();

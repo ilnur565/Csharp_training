@@ -91,15 +91,15 @@ namespace addressbook_web_tests
 
 
 
-        [Test, TestCaseSource("GroupDataFromXmlFile")]
+        [Test, TestCaseSource("GroupDataFromJsonFile")]
         public void GroupCreationTest(GroupData group)
         {
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
 
             app.Groups.Create(group);
             Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
-            List<GroupData> newGroups = app.Groups.GetGroupList(); // Контейнер или коллекция т.е объект который хранит набор других объектов
+            List<GroupData> newGroups = GroupData.GetAll(); // Контейнер или коллекция т.е объект который хранит набор других объектов
 
 
             oldGroups.Add(group);
@@ -136,7 +136,7 @@ namespace addressbook_web_tests
             //app.Auth.Logout();
         }
         [Test]
-        public void TestDBConnectivity()
+         public void TestDBConnectivity()
         {
             DateTime start = DateTime.Now;
 
@@ -145,10 +145,8 @@ namespace addressbook_web_tests
             System.Console.WriteLine(end.Subtract(start));
 
             DateTime start1 = DateTime.Now;
-            AddressBookDB db = new AddressBookDB();
-            List<GroupData> fromDb = (from g in db.Groups select g).ToList();
-            db.Close();
-            DateTime end1 = DateTime.Now;
+            List<GroupData> fromDb = GroupData.GetAll();
+             DateTime end1 = DateTime.Now;
             System.Console.WriteLine(end1.Subtract(start1));
         }
     }

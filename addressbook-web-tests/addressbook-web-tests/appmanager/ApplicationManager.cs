@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
@@ -43,6 +44,7 @@ namespace addressbook_web_tests
             }
 
         }
+       
         public static ApplicationManager GetInstance()
         {
             if (! app.IsValueCreated)

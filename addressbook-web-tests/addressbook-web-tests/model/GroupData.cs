@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using addressbook_web_tests.model;
 using LinqToDB.Mapping;
 
 namespace addressbook_web_tests
@@ -85,6 +86,13 @@ namespace addressbook_web_tests
                 footer = value;
             }
 
+        }
+        public static  List <GroupData> GetAll()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from g in db.Groups select g).ToList();
+            }
         }
 
 

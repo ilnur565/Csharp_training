@@ -46,7 +46,7 @@ namespace addressbook_test_data_generators
                 }
                 else
                 {
-                    StreamWriter writer = new StreamWriter(@"C:\Users\User\source\repos\Csharp_training\addressbook-web-tests\addressbook-web-tests\group.csv");
+                    StreamWriter writer = new StreamWriter(@"C:\Users\User\source\repos\Csharp_training\addressbook-web-tests\addressbook-web-tests\group.json");
 
                     if (format == "csv")
                     {
