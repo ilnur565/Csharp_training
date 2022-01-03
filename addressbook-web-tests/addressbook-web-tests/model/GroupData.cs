@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LinqToDB.Mapping;
 
 namespace addressbook_web_tests
 {
+    [Table(Name = "group_list")]
     public class GroupData : IEquatable<GroupData>, IComparable<GroupData>  // определяем ф-ю сравнения; Класс GroupData наследует IEquatable
     {
 
@@ -27,6 +29,7 @@ namespace addressbook_web_tests
                this.footer = footer;
            }*/
 
+        [Column(Name= "group_id"), PrimaryKey, Identity]
         public string Id { get; set; }
 
         public bool Equals(GroupData other)
@@ -54,7 +57,9 @@ namespace addressbook_web_tests
             return Name.CompareTo(other.Name);
         }
 
+        [Column(Name = "group_name"), NotNull]
         public string Name { get; set; }
+        [Column(Name = "group_header"), NotNull]
         public string Header
         { 
             get
@@ -67,6 +72,8 @@ namespace addressbook_web_tests
             }
         
         }
+        [Column(Name = "group_footer"), NotNull]
+
         public string Footer
         {
             get

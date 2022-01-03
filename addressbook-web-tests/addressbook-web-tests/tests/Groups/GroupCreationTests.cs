@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
+using LinqToDB;
 using System.IO;
 using System.Threading;
 using OpenQA.Selenium;
@@ -17,6 +17,7 @@ using addressbook_web_tests;
 using System.Xml.Serialization;
 using System.Xml;
 using Newtonsoft.Json;
+using addressbook_web_tests.model;
 
 namespace addressbook_web_tests
 {
@@ -43,11 +44,11 @@ namespace addressbook_web_tests
         public static IEnumerable<GroupData> GroupDataFromXmlFile()
         {
             string path = @"C: \Users\User\source\repos\Csharp_training\addressbook-web-tests\addressbook-web-tests\group.xml";
-            
-            
-            return (List<GroupData>) new XmlSerializer(typeof (List<GroupData>)).Deserialize(new StreamReader(path));
-          
-             
+
+
+            return (List<GroupData>)new XmlSerializer(typeof(List<GroupData>)).Deserialize(new StreamReader(path));
+
+
         }
         public static IEnumerable<GroupData> GroupDataFromJsonFile()
         {
@@ -63,7 +64,7 @@ namespace addressbook_web_tests
 
             foreach (string l in lines)
             {
-               string[] parts= l.Split(',');
+                string[] parts = l.Split(',');
                 groups.Add(new GroupData(parts[0])
                 {
                     Header = parts[1],
@@ -97,20 +98,20 @@ namespace addressbook_web_tests
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
             app.Groups.Create(group);
-            Assert.AreEqual(oldGroups.Count+1, app.Groups.GetGroupCount());
+            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
             List<GroupData> newGroups = app.Groups.GetGroupList(); // Контейнер или коллекция т.е объект который хранит набор других объектов
 
 
             oldGroups.Add(group);
-           
+
             newGroups.Sort();
             oldGroups.Sort();
             Assert.AreEqual(newGroups, oldGroups);
-            System.Console.Out.Write(Convert.ToString(oldGroups.Count)+newGroups.Count);
+            System.Console.Out.Write(Convert.ToString(oldGroups.Count) + newGroups.Count);
             //app.Auth.Logout();
-          
 
-            
+
+
         }
 
         [Test]
@@ -134,6 +135,21 @@ namespace addressbook_web_tests
             Assert.AreEqual(oldGroups, newGroups);
             //app.Auth.Logout();
         }
+        [Test]
+        public void TestDBConnectivity()
+        {
+            DateTime start = DateTime.Now;
 
+            List<GroupData> fromUi = app.Groups.GetGroupList();
+            DateTime end = DateTime.Now;
+            System.Console.WriteLine(end.Subtract(start));
+
+            DateTime start1 = DateTime.Now;
+            AddressBookDB db = new AddressBookDB();
+            List<GroupData> fromDb = (from g in db.Groups select g).ToList();
+            db.Close();
+            DateTime end1 = DateTime.Now;
+            System.Console.WriteLine(end1.Subtract(start1));
+        }
     }
 }
