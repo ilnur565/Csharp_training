@@ -23,7 +23,7 @@ namespace addressbook_web_tests
 {
 
     [TestFixture]
-    public class GroupCreationTests : AuthTestBase
+    public class GroupCreationTests : GroupTestBase 
     {
         /*[Test]
         public void GroupCreationTest()
@@ -97,7 +97,7 @@ namespace addressbook_web_tests
 
             List<GroupData> oldGroups = GroupData.GetAll();
 
-            app.Groups.Create(group);
+            app.Groups.Create(group);  
             Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
             List<GroupData> newGroups = GroupData.GetAll(); // Контейнер или коллекция т.е объект который хранит набор других объектов
 
@@ -122,11 +122,11 @@ namespace addressbook_web_tests
             group1.Header = "s";
             group1.Footer = "g";
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll(); ;
 
             app.Groups.Create(group1);
             Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
-            List<GroupData> newGroups = app.Groups.GetGroupList(); // Контейнер или коллекция т.е объект который хранит набор других объектов
+            List<GroupData> newGroups = GroupData.GetAll();  // Контейнер или коллекция т.е объект который хранит набор других объектов
 
 
             oldGroups.Add(group1);
@@ -156,13 +156,15 @@ namespace addressbook_web_tests
             int i;
             int max = fromDb.Count;
             Console.WriteLine(max);
+            string[] names=new string[max];
             for (i = 0; i < max; i++)
             {
+                names[i] = fromDb[i].Name;
                 Console.WriteLine(fromDb[i].Name);
             }
             
-            
-            
+
+
         }
        
     }

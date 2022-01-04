@@ -1,12 +1,10 @@
 [
   {
-    "Id": null,
     "Name": "HB",
     "Header": ";",
     "Footer": ""
   },
   {
-    "Id": null,
     "Name": ")%",
     "Header": "^(OP",
     "Footer": "S"
