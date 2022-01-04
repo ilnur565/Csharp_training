@@ -136,7 +136,7 @@ namespace addressbook_web_tests
             //app.Auth.Logout();
         }
         [Test]
-         public void TestDBConnectivity()
+        public void TestDBConnectivity()
         {
             DateTime start = DateTime.Now;
 
@@ -146,8 +146,24 @@ namespace addressbook_web_tests
 
             DateTime start1 = DateTime.Now;
             List<GroupData> fromDb = GroupData.GetAll();
-             DateTime end1 = DateTime.Now;
+            DateTime end1 = DateTime.Now;
             System.Console.WriteLine(end1.Subtract(start1));
         }
+        [Test] // Вывод всех имен групп
+        public void AllGrouopNames() 
+        {
+            List<GroupData> fromDb = GroupData.GetAll();
+            int i;
+            int max = fromDb.Count;
+            Console.WriteLine(max);
+            for (i = 0; i < max; i++)
+            {
+                Console.WriteLine(fromDb[i].Name);
+            }
+            
+            
+            
+        }
+       
     }
 }

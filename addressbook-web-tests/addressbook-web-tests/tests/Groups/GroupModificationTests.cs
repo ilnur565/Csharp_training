@@ -24,12 +24,12 @@ namespace addressbook_web_tests
             newData.Header = null;
             newData.Footer = null;
             
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
             GroupData oldData = oldGroups[0];
-            app.Groups.Modify(0, newData);
+            app.Groups.Modify(oldData, newData);
 
-            
-            List<GroupData> newGroups = app.Groups.GetGroupList(); // Контейнер или коллекция т.е объект который хранит набор других объектов
+             
+            List<GroupData> newGroups = GroupData.GetAll(); // Контейнер или коллекция т.е объект который хранит набор других объектов
             
             oldGroups[0].Name=newData.Name;
             oldGroups.Sort();

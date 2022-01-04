@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ using LinqToDB.Mapping;
 namespace addressbook_web_tests
 {
     [Table(Name = "group_list")]
-    public class GroupData : IEquatable<GroupData>, IComparable<GroupData>  // определяем ф-ю сравнения; Класс GroupData наследует IEquatable
+    public class GroupData : IEquatable<GroupData>, IComparable<GroupData>, IEnumerable<GroupData>  // определяем ф-ю сравнения; Класс GroupData наследует IEquatable
     {
 
         private string header=""; 
@@ -95,6 +96,14 @@ namespace addressbook_web_tests
             }
         }
 
+         IEnumerator<GroupData> IEnumerable<GroupData>.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
 
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
