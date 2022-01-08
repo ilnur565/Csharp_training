@@ -17,7 +17,7 @@ using addressbook_web_tests;
 using System.Xml.Serialization;
 using System.Xml;
 using Newtonsoft.Json;
-using addressbook_web_tests.model;
+//using addressbook_web_tests.model;
 
 namespace addressbook_web_tests
 {
@@ -166,6 +166,25 @@ namespace addressbook_web_tests
 
 
         }
-       
+        [Test]
+        public void TestDBConnectivity2()
+        {
+            foreach (ContactCreationData contact in GroupData.GetAll()[0].GetContacts())
+            {
+                System.Console.Out.WriteLine(contact);
+                System.Console.Out.WriteLine("====");
+            }
+            System.Console.Out.WriteLine(GroupData.GetAll().Count);
+
+        }
+        [Test]
+        public void TestDBConnectivity3()
+        {
+            var qwer = new GroupContactRelation();
+            System.Console.Out.WriteLine(qwer.GetGroupContactRelation().Count);
+            System.Console.Out.WriteLine(GroupData.GetAll()[0].Name);
+
+        }
+
     }
 }

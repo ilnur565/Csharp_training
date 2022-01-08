@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using LinqToDB;
 using MySql.Data.MySqlClient;
 
-namespace addressbook_web_tests.model
+namespace addressbook_web_tests
 {
     public class AddressBookDB: LinqToDB.Data.DataConnection
     {   
@@ -14,5 +14,6 @@ namespace addressbook_web_tests.model
 
         public ITable<GroupData> Groups { get { return GetTable<GroupData>(); } }
         public ITable<ContactCreationData> Contacts { get { return GetTable<ContactCreationData>(); } }
+        public ITable<GroupContactRelation> GCR { get { return GetTable<GroupContactRelation>(); } }
     }
 }
